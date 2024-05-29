@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- General Project Information -->
+        <TargetFramework>net472</TargetFramework>
+        <AssemblyName>MaxWasUnavailable.MechAffinity</AssemblyName>
+        <PackageId>MaxWasUnavailable.MechAffinity</PackageId>
+        <Title>MechAffinity</Title>
+        <Description>Pilots now build affinity towards the mech they control, adding bonuses and incentive to keep pilots matched to specific mechs.</Description>
+        <Version>1.0.0</Version>
+        <Authors>MaxWasUnavailable</Authors>
+        <PackageTags>phantom;brigade</PackageTags>
+
+        <!-- Package Information -->
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/MaxWasUnavailable/MechAffinity</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/MaxWasUnavailable/MechAffinity</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+
+        <!-- Build Information -->
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+
+        <!-- NuGet Information -->
+        <RestoreAdditionalProjectSources>
+            https://api.nuget.org/v3/index.json;
+            https://nuget.bepinex.dev/v3/index.json
+        </RestoreAdditionalProjectSources>
+
+        <!-- Prevent Publicizer Warnings from Showing -->
+        <NoWarn>$(NoWarn);CS0436</NoWarn>
+    </PropertyGroup>
+
+    <!-- Include README and CHANGELOG in the package -->
+    <ItemGroup>
+        <None Include="$(ProjectDir)../README.md" Pack="true" PackagePath="/"/>
+        <None Include="$(ProjectDir)../CHANGELOG.md" Pack="true" PackagePath="/"/>
+    </ItemGroup>
+
+    <!-- BepInEx Assembly Publicizer -->
+    <ItemGroup>
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" ExcludeAssets="runtime"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="UnityEngine" HintPath="$(PB_REFERENCES)\UnityEngine.dll" Private="False" Publicize="true"/>
+        <Reference Include="UnityEngine.CoreModule" HintPath="$(PB_REFERENCES)\UnityEngine.CoreModule.dll" Private="False" Publicize="true"/>
+        <Reference Include="Harmony" HintPath="$(PB_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>
+        <Reference Include="Assembly-CSharp" HintPath="$(PB_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
+        <Reference Include="Assembly-CSharp-firstpass" HintPath="$(PB_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False"/>
+        <Reference Include="Entitas" HintPath="$(PB_REFERENCES)\Entitas.dll" Private="False" Publicize="true"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
+    </ItemGroup>
+</Project>

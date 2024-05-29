@@ -1,0 +1,12 @@
+id: MaxWasUnavailable.MechAffinity
+ver: v0.0.1
+includesConfigOverrides: false
+includesConfigEdits: false
+includesLibraries: true
+includesTextures: false
+includesLocalizationEdits: false
+includesLocalizations: false
+gameVersionMin: 1.3
+gameVersionMax: 1.3
+name: Mech Affinity
+desc: Pilots now build affinity towards the mech they control, adding bonuses and incentive to keep pilots matched to specific mechs.
