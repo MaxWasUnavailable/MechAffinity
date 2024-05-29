@@ -31,6 +31,8 @@
 
         <!-- Prevent Publicizer Warnings from Showing -->
         <NoWarn>$(NoWarn);CS0436</NoWarn>
+        
+        <ModDestination>$(ProjectDir)..\mod\$(Title)</ModDestination>
     </PropertyGroup>
 
     <!-- Include README and CHANGELOG in the package -->
@@ -56,4 +58,30 @@
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
     </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="Build">
+        <!-- Display a message -->
+        <Message Text="PostBuild target is being executed." Importance="high" />
+
+        <!-- Display the source and destination paths of the Copy tasks -->
+        <Message Text="Copying build output from $(OutDir)*.dll to $(ModDestination)/Library" Importance="high" />
+        <Message Text="Copying README from $(ProjectDir)\..\README.md to $(ModDestination)" Importance="high" />
+        <Message Text="Copying CHANGELOG from $(ProjectDir)\..\CHANGELOG.md to $(ModDestination)" Importance="high" />
+        <Message Text="Copying metadata from $(ProjectDir)\metadata.yaml to $(ModDestination)" Importance="high" />
+
+        <!-- Create an item for all .dll files in the output directory -->
+        <CreateItem Include="$(OutDir)*.dll">
+            <Output TaskParameter="Include" ItemName="DllFiles"/>
+        </CreateItem>
+        
+        <!-- Copy the build output -->
+        <Copy SourceFiles="@(DllFiles)" DestinationFolder="$(ModDestination)/Library" />
+
+        <!-- Copy README & CHANGELOG -->
+        <Copy SourceFiles="$(ProjectDir)..\README.md" DestinationFolder="$(ModDestination)" />
+        <Copy SourceFiles="$(ProjectDir)..\CHANGELOG.md" DestinationFolder="$(ModDestination)" />
+        
+        <!-- Copy mod metadata -->
+        <Copy SourceFiles="$(ProjectDir)metadata.yaml" DestinationFolder="$(ModDestination)" />
+    </Target>
 </Project>
