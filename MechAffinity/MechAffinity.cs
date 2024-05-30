@@ -11,9 +11,9 @@ namespace MechAffinity;
 public class MechAffinity : ModLink
 {
     private bool _isPatched;
-    public string Guid { get; } = "MaxWasUnavailable.MechAffinity";
-    public string Name { get; } = "MechAffinity";
-    public Version Version { get; } = new(1, 0, 0);
+    public static string Guid { get; } = "MaxWasUnavailable.MechAffinity";
+    public static string Name { get; } = "MechAffinity";
+    public static Version Version { get; } = new(0, 0, 1);
 
     /// <summary>
     ///     Singleton instance of the plugin.
