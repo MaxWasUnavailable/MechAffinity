@@ -64,10 +64,10 @@
         <Message Text="PostBuild target is being executed." Importance="high"/>
 
         <!-- Display the source and destination paths of the Copy tasks -->
-        <Message Text="Copying build output from $(OutDir)*.dll to $(ModDestination)/Library" Importance="high"/>
-        <Message Text="Copying README from $(ProjectDir)\..\README.md to $(ModDestination)" Importance="high"/>
-        <Message Text="Copying CHANGELOG from $(ProjectDir)\..\CHANGELOG.md to $(ModDestination)" Importance="high"/>
-        <Message Text="Copying metadata from $(ProjectDir)\metadata.yaml to $(ModDestination)" Importance="high"/>
+        <Message Text="Copying build output from $(OutDir)*.dll to $(ModDestination)\Libraries" Importance="high"/>
+        <Message Text="Copying README from $(ProjectDir)..\README.md to $(ModDestination)" Importance="high"/>
+        <Message Text="Copying CHANGELOG from $(ProjectDir)..\CHANGELOG.md to $(ModDestination)" Importance="high"/>
+        <Message Text="Copying metadata from $(ProjectDir)metadata.yaml to $(ModDestination)" Importance="high"/>
 
         <!-- Create an item for all .dll files in the output directory -->
         <CreateItem Include="$(OutDir)*.dll">
@@ -75,7 +75,7 @@
         </CreateItem>
 
         <!-- Copy the build output -->
-        <Copy SourceFiles="@(DllFiles)" DestinationFolder="$(ModDestination)/Library"/>
+        <Copy SourceFiles="@(DllFiles)" DestinationFolder="$(ModDestination)\Libraries"/>
 
         <!-- Copy README & CHANGELOG -->
         <Copy SourceFiles="$(ProjectDir)..\README.md" DestinationFolder="$(ModDestination)"/>
