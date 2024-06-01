@@ -71,12 +71,12 @@ public class MechAffinityHelper
         if (!pilot.hasCustomMemory)
         {
             pilot.AddCustomMemory(new SortedDictionary<string, CustomMemoryValue>
-                { { AffinityListKey, new CustomMemoryStringList(affinityList) } });
+                { { AffinityListKey, new CustomMemoryStringList { value = affinityList } } });
             return;
         }
 
         var customMemory = pilot.customMemory.s;
-        customMemory.Add(AffinityListKey, new CustomMemoryStringList(affinityList));
+        customMemory[AffinityListKey] = new CustomMemoryStringList { value = affinityList };
         pilot.ReplaceCustomMemory(customMemory);
     }
 
