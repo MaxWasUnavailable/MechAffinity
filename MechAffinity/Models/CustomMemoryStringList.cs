@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using Content.Code.Utility;
 using PhantomBrigade.Data;
 
 namespace MechAffinity.Models;
 
-public class CustomMemoryStringList(List<string> stringList) : CustomMemoryValue
+#nullable disable
+[TypeHinted]
+public class CustomMemoryStringList : CustomMemoryValue
 {
-    public List<string> value = stringList;
+    // ReSharper disable once InconsistentNaming
+    public List<string> value;
 }
