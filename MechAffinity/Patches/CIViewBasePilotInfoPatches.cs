@@ -42,7 +42,8 @@ internal static class CIViewBasePilotInfoPatches
             if (mech == null)
                 // Should remove the mech from the list if it doesn't exist?
                 continue;
-            stringToAdd += $"- {mech.unitIdentification.nameOverride}: {MechAffinityHelper.GetMechAffinity(pilot, mech)}\n";
+            stringToAdd +=
+                $"- {mech.unitIdentification.nameOverride}: {MechAffinityHelper.GetMechAffinity(pilot, mech)}\n";
         }
 
         return stringToAdd + "\n\n";
