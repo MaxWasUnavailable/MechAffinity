@@ -37,7 +37,7 @@ public class MechAffinityHelper
         return SetMechAffinity(pilot, mech, GetMechAffinity(pilot, mech) + affinityToAdd);
     }
 
-    public static float RemoveMechAffinity(PersistentEntity pilot, PersistentEntity mech, float affinityToRemove)
+    public static float ReduceMechAffinity(PersistentEntity pilot, PersistentEntity mech, float affinityToRemove)
     {
         var newAffinity = SetMechAffinity(pilot, mech, GetMechAffinity(pilot, mech) - affinityToRemove);
         if (newAffinity > 0.0f)
