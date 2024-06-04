@@ -12,12 +12,12 @@ public static class MechAffinityHelper
     private static string AffinityKeyPrefix => $"{Prefix}affinity_";
     private static string AffinityListKey => $"{Prefix}affinity_list";
 
-    private static string AffinityKey(this PersistentEntity mech)
+    private static string AffinityKey(PersistentEntity mech)
     {
         return $"{AffinityKeyPrefix}{mech.nameInternal.s}";
     }
 
-    public static float SetMechAffinity(this PersistentEntity pilot, PersistentEntity mech, float affinity)
+    public static float SetMechAffinity(PersistentEntity pilot, PersistentEntity mech, float affinity)
     {
         if (affinity > 0.0f)
             AddMechAffinityToList(pilot, mech);
@@ -26,18 +26,18 @@ public static class MechAffinityHelper
         return affinity;
     }
 
-    public static float GetMechAffinity(this PersistentEntity pilot, PersistentEntity mech)
+    public static float GetMechAffinity(PersistentEntity pilot, PersistentEntity mech)
     {
         return pilot.TryGetMemoryFloat(AffinityKey(mech), out var affinity) ? affinity : 0.0f;
     }
 
-    public static float AddMechAffinity(this PersistentEntity pilot, PersistentEntity mech, float affinityToAdd)
+    public static float AddMechAffinity(PersistentEntity pilot, PersistentEntity mech, float affinityToAdd)
     {
         AddMechAffinityToList(pilot, mech);
         return SetMechAffinity(pilot, mech, GetMechAffinity(pilot, mech) + affinityToAdd);
     }
 
-    public static float ReduceMechAffinity(this PersistentEntity pilot, PersistentEntity mech, float affinityToRemove)
+    public static float ReduceMechAffinity(PersistentEntity pilot, PersistentEntity mech, float affinityToRemove)
     {
         var newAffinity = SetMechAffinity(pilot, mech, GetMechAffinity(pilot, mech) - affinityToRemove);
         if (newAffinity > 0.0f)
@@ -48,13 +48,13 @@ public static class MechAffinityHelper
         return 0.0f;
     }
 
-    public static void ClearMechAffinity(this PersistentEntity pilot, PersistentEntity mech)
+    public static void ClearMechAffinity(PersistentEntity pilot, PersistentEntity mech)
     {
         pilot.RemoveMemoryFloat(AffinityKey(mech));
         RemoveMechAffinityFromList(pilot, mech);
     }
 
-    public static List<string> GetMechAffinityList(this PersistentEntity pilot)
+    public static List<string> GetMechAffinityList(PersistentEntity pilot)
     {
         if (!pilot.hasCustomMemory)
             return [];
@@ -66,7 +66,7 @@ public static class MechAffinityHelper
         return [];
     }
 
-    public static void SetMechAffinityList(this PersistentEntity pilot, List<string> affinityList)
+    public static void SetMechAffinityList(PersistentEntity pilot, List<string> affinityList)
     {
         if (!pilot.hasCustomMemory)
         {
@@ -80,7 +80,7 @@ public static class MechAffinityHelper
         pilot.ReplaceCustomMemory(customMemory);
     }
 
-    public static void AddMechAffinityToList(this PersistentEntity pilot, PersistentEntity mech)
+    public static void AddMechAffinityToList(PersistentEntity pilot, PersistentEntity mech)
     {
         var affinityList = GetMechAffinityList(pilot);
         if (affinityList.Contains(mech.nameInternal.s))
@@ -90,7 +90,7 @@ public static class MechAffinityHelper
         SetMechAffinityList(pilot, affinityList);
     }
 
-    public static void RemoveMechAffinityFromList(this PersistentEntity pilot, PersistentEntity mech)
+    public static void RemoveMechAffinityFromList(PersistentEntity pilot, PersistentEntity mech)
     {
         var affinityList = GetMechAffinityList(pilot);
         if (!affinityList.Contains(mech.nameInternal.s))
@@ -100,12 +100,12 @@ public static class MechAffinityHelper
         SetMechAffinityList(pilot, affinityList);
     }
 
-    public static void ClearMechAffinityList(this PersistentEntity pilot)
+    public static void ClearMechAffinityList(PersistentEntity pilot)
     {
         SetMechAffinityList(pilot, []);
     }
 
-    public static bool HasMechAffinity(this PersistentEntity pilot, PersistentEntity mech)
+    public static bool HasMechAffinity(PersistentEntity pilot, PersistentEntity mech)
     {
         return GetMechAffinityList(pilot).Contains(mech.nameInternal.s);
     }
