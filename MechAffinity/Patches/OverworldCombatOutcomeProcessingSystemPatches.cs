@@ -7,6 +7,9 @@ using PhantomBrigade.Overworld.Systems;
 
 namespace MechAffinity.Patches;
 
+/// <summary>
+///     Patches the OverworldCombatOutcomeProcessingSystem to handle mech affinity changes after combat.
+/// </summary>
 [HarmonyPatch(typeof(OverworldCombatOutcomeProcessingSystem))]
 internal static class OverworldCombatOutcomeProcessingSystemPatches
 {

@@ -4,6 +4,9 @@ using PhantomBrigade.Combat.Systems;
 
 namespace MechAffinity.Patches;
 
+/// <summary>
+///     Patches the CombatDamageSystem to apply the damage reduction multiplier
+/// </summary>
 [HarmonyPatch(typeof(CombatDamageSystem))]
 internal static class CombatDamageSystemPatches
 {

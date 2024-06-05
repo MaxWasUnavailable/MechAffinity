@@ -7,6 +7,10 @@ using MechAffinity.Features;
 
 namespace MechAffinity.Patches;
 
+/// <summary>
+///     Patches the CIViewBasePilotInfo to inject the MechAffinityUI.GetBioText method, displaying mech affinity in a
+///     pilot's bio
+/// </summary>
 [HarmonyPatch(typeof(CIViewBasePilotInfo))]
 internal static class CIViewBasePilotInfoPatches
 {

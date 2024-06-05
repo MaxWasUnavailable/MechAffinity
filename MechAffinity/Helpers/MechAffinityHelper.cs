@@ -16,12 +16,12 @@ public static class MechAffinityHelper
     ///     Prefix for all memory keys used by the mod's affinity system.
     /// </summary>
     private static string Prefix => $"{MechAffinity.Name}_";
-    
+
     /// <summary>
     ///     Prefix for all mech affinity keys.
     /// </summary>
     private static string AffinityKeyPrefix => $"{Prefix}affinity_";
-    
+
     /// <summary>
     ///     Key for the affinity list in the pilot's custom memory.
     /// </summary>
@@ -116,7 +116,7 @@ public static class MechAffinityHelper
         pilot.RemoveMemoryFloat(AffinityKey(mech));
         RemoveMechAffinityFromList(pilot, mech);
     }
-    
+
     /// <summary>
     ///     Clears the affinity of a pilot for a mech by its internal name.
     /// </summary>
@@ -188,7 +188,7 @@ public static class MechAffinityHelper
     {
         RemoveMechAffinityFromList(pilot, mech.nameInternal.s);
     }
-    
+
     /// <summary>
     ///     Removes a mech from a pilot's mech affinity list.
     /// </summary>
