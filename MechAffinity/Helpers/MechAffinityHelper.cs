@@ -116,6 +116,17 @@ public static class MechAffinityHelper
         pilot.RemoveMemoryFloat(AffinityKey(mech));
         RemoveMechAffinityFromList(pilot, mech);
     }
+    
+    /// <summary>
+    ///     Clears the affinity of a pilot for a mech by its internal name.
+    /// </summary>
+    /// <param name="pilot"> The pilot to clear the affinity for. </param>
+    /// <param name="mechInternalName"> The internal name of the mech to clear the affinity for. </param>
+    public static void ClearMechAffinity(PersistentEntity pilot, string mechInternalName)
+    {
+        pilot.RemoveMemoryFloat(AffinityKeyPrefix + mechInternalName);
+        RemoveMechAffinityFromList(pilot, mechInternalName);
+    }
 
     /// <summary>
     ///     Gets the list of mech internal names a pilot has affinity with.
