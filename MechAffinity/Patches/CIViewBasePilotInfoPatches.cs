@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
-using MechAffinity.Helpers;
-using PhantomBrigade;
+using MechAffinity.Features;
 
 // ReSharper disable InconsistentNaming
 
@@ -23,29 +22,7 @@ internal static class CIViewBasePilotInfoPatches
             .InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_1))
             .ThrowIfNotMatch("Not at \\n insertion point", [new CodeMatch(OpCodes.Ldstr, "\n")])
             .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Call,
-                AccessTools.Method(typeof(CIViewBasePilotInfoPatches), nameof(GetMechAffinityBioString))))
+                AccessTools.Method(typeof(MechAffinityUI), nameof(MechAffinityUI.GetBioText))))
             .InstructionEnumeration();
-    }
-
-    public static string GetMechAffinityBioString(PersistentEntity pilot)
-    {
-        var stringToAdd = "\n";
-
-        var mechAffinityList = MechAffinityHelper.GetMechAffinityList(pilot);
-        if (mechAffinityList.Count == 0)
-            return stringToAdd;
-
-        stringToAdd += "Mech Affinity:\n";
-        foreach (var mechInternalName in mechAffinityList)
-        {
-            var mech = IDUtility.GetPersistentEntity(mechInternalName);
-            if (mech == null)
-                // Should remove the mech from the list if it doesn't exist?
-                continue;
-            stringToAdd +=
-                $"- {mech.unitIdentification.nameOverride}: {MechAffinityHelper.GetMechAffinity(pilot, mech)}\n";
-        }
-
-        return stringToAdd + "\n\n";
     }
 }
