@@ -65,6 +65,17 @@ public static class MechAffinityHelper
     }
 
     /// <summary>
+    ///     Gets the affinity of mech's active pilot for the provided mech.
+    /// </summary>
+    /// <param name="mech"> The mech to get its pilot's affinity for. </param>
+    /// <returns> The affinity of the mech's pilot for the mech. </returns>
+    public static float GetMechAffinityOfActivePilot(PersistentEntity mech)
+    {
+        var pilot = IDUtility.GetLinkedPilot(mech);
+        return pilot != null ? GetMechAffinity(pilot, mech) : 0.0f;
+    }
+
+    /// <summary>
     ///     Adds affinity to a pilot for a mech.
     /// </summary>
     /// <param name="pilot"> The pilot to add affinity to. </param>
