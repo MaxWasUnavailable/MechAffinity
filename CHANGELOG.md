@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 05-06-2024
+
+### Fixed
+
+- Fixed bug with bio generation where it was assumed all mechs had a linked pilot component.
+- Fixed bug with mech to pilot matching in bio not being correct
+
 ## [0.1.0] - 05-06-2024
 
 ### Added

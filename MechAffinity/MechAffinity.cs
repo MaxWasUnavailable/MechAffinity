@@ -13,7 +13,7 @@ public class MechAffinity : ModLink
     private bool _isPatched;
     public static string Guid { get; } = "MaxWasUnavailable.MechAffinity";
     public static string Name { get; } = "MechAffinity";
-    public static Version Version { get; } = new(0, 1, 0);
+    public static Version Version { get; } = new(0, 1, 1);
 
     /// <summary>
     ///     Singleton instance of the plugin.

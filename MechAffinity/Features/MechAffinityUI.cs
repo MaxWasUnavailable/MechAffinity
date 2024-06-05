@@ -1,5 +1,6 @@
 using MechAffinity.Helpers;
 using PhantomBrigade;
+using PhantomBrigade.Game;
 
 namespace MechAffinity.Features;
 
@@ -15,13 +16,11 @@ public static class MechAffinityUI
     /// <returns> The string with the mech affinity information. </returns>
     public static string GetBioText(PersistentEntity pilot)
     {
-        var stringToAdd = "\n\n";
-
         var mechAffinityList = MechAffinityHelper.GetMechAffinityList(pilot);
         if (mechAffinityList.Count == 0)
-            return stringToAdd;
+            return "\n";
 
-        PersistentEntity? currentMech = null;
+        var stringToAdd = "\n\n";
 
         stringToAdd += "Mech Affinity:\n";
         foreach (var mechInternalName in mechAffinityList)
@@ -33,19 +32,20 @@ public static class MechAffinityUI
                 continue;
             }
 
-            stringToAdd +=
-                $"- {mech.unitIdentification.nameOverride}: {MechAffinityHelper.GetMechAffinity(pilot, mech)}\n";
-
-            if (mech.entityLinkPilot.persistentID == pilot.id.id)
-                currentMech = mech;
+            if (mech.hasUnitIdentification)
+                stringToAdd +=
+                    $"- {mech.unitIdentification.nameOverride}: {MechAffinityHelper.GetMechAffinity(pilot, mech)}\n";
         }
+        
+        
+        // TODO: Contexts.sharedInstance.persistent.squadComposition.slots
 
-        if (currentMech != null)
-        {
-            stringToAdd += "\n\n";
-            stringToAdd += "Current mech bonuses:\n";
-            stringToAdd += $"- Damage reduction: {MechAffinityBonus.GetDamageReductionMultiplier(currentMech) * 100}%";
-        }
+        // if (currentMech != null)
+        // {
+        //     stringToAdd += "\n\n";
+        //     stringToAdd += "Current mech bonuses:\n";
+        //     stringToAdd += $"- Damage reduction: {MechAffinityBonus.GetDamageReductionMultiplier(currentMech) * 100}%\n";
+        // }
 
         return stringToAdd + "\n\n";
     }
