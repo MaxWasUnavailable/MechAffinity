@@ -175,11 +175,21 @@ public static class MechAffinityHelper
     /// <param name="mech"> The mech to remove from the pilot's mech affinity list. </param>
     public static void RemoveMechAffinityFromList(PersistentEntity pilot, PersistentEntity mech)
     {
+        RemoveMechAffinityFromList(pilot, mech.nameInternal.s);
+    }
+    
+    /// <summary>
+    ///     Removes a mech from a pilot's mech affinity list.
+    /// </summary>
+    /// <param name="pilot"> The pilot to remove the mech from. </param>
+    /// <param name="mechInternalName"> The internal name of the mech to remove from the pilot's mech affinity list. </param>
+    public static void RemoveMechAffinityFromList(PersistentEntity pilot, string mechInternalName)
+    {
         var affinityList = GetMechAffinityList(pilot);
-        if (!affinityList.Contains(mech.nameInternal.s))
+        if (!affinityList.Contains(mechInternalName))
             return;
 
-        affinityList.Remove(mech.nameInternal.s);
+        affinityList.Remove(mechInternalName);
         SetMechAffinityList(pilot, affinityList);
     }
 
