@@ -60,28 +60,23 @@
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="Build">
-        <!-- Display a message -->
-        <Message Text="PostBuild target is being executed." Importance="high"/>
-
-        <!-- Display the source and destination paths of the Copy tasks -->
-        <Message Text="Copying build output from $(OutDir)*.dll to $(ModDestination)\Libraries" Importance="high"/>
-        <Message Text="Copying README from $(ProjectDir)..\README.md to $(ModDestination)" Importance="high"/>
-        <Message Text="Copying CHANGELOG from $(ProjectDir)..\CHANGELOG.md to $(ModDestination)" Importance="high"/>
-        <Message Text="Copying metadata from $(ProjectDir)metadata.yaml to $(ModDestination)" Importance="high"/>
-
         <!-- Create an item for all .dll files in the output directory -->
         <CreateItem Include="$(OutDir)*.dll">
             <Output TaskParameter="Include" ItemName="DllFiles"/>
         </CreateItem>
 
         <!-- Copy the build output -->
+        <Message Text="Copying build output assemblies from $(OutDir)*.dll to $(ModDestination)\Libraries" Importance="high"/>
         <Copy SourceFiles="@(DllFiles)" DestinationFolder="$(ModDestination)\Libraries"/>
-
+        
         <!-- Copy README & CHANGELOG -->
+        <Message Text="Copying README from $(ProjectDir)..\README.md to $(ModDestination)" Importance="high"/>
         <Copy SourceFiles="$(ProjectDir)..\README.md" DestinationFolder="$(ModDestination)"/>
+        <Message Text="Copying CHANGELOG from $(ProjectDir)..\CHANGELOG.md to $(ModDestination)" Importance="high"/>
         <Copy SourceFiles="$(ProjectDir)..\CHANGELOG.md" DestinationFolder="$(ModDestination)"/>
 
         <!-- Copy mod metadata -->
+        <Message Text="Copying mod metadata from $(ProjectDir)metadata.yaml to $(ModDestination)" Importance="high"/>
         <Copy SourceFiles="$(ProjectDir)metadata.yaml" DestinationFolder="$(ModDestination)"/>
     </Target>
 </Project>
