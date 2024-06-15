@@ -1,6 +1,6 @@
+using System.Linq;
 using MechAffinity.Helpers;
 using PhantomBrigade;
-using PhantomBrigade.Game;
 
 namespace MechAffinity.Features;
 
@@ -36,16 +36,30 @@ public static class MechAffinityUI
                 stringToAdd +=
                     $"- {mech.unitIdentification.nameOverride}: {MechAffinityHelper.GetMechAffinity(pilot, mech)}\n";
         }
-        
-        
-        // TODO: Contexts.sharedInstance.persistent.squadComposition.slots
 
-        // if (currentMech != null)
-        // {
-        //     stringToAdd += "\n\n";
-        //     stringToAdd += "Current mech bonuses:\n";
-        //     stringToAdd += $"- Damage reduction: {MechAffinityBonus.GetDamageReductionMultiplier(currentMech) * 100}%\n";
-        // }
+        foreach (var currentMech in from slot in Contexts.sharedInstance.persistent.squadComposition.slots
+                 where slot.pilotNameInternal == pilot.nameInternal.s
+                 select IDUtility.GetPersistentEntity(slot.unitNameInternal))
+        {
+            stringToAdd += "\n\n";
+            
+            var hasBonuses = false;
+            var damageReduction = 1f - MechAffinityBonus.GetDamageReductionMultiplier(currentMech);
+            if (damageReduction > 0)
+            {
+                hasBonuses = true;
+            }
+            
+            if (hasBonuses) {
+                stringToAdd += "Current mech bonuses:\n";
+                stringToAdd +=
+                    $"- Damage reduction: {damageReduction}%\n";
+            } else {
+                stringToAdd += "No affinity bonuses unlocked for piloted mech.";
+            }
+            
+            break;
+        }
 
         return stringToAdd + "\n\n";
     }
