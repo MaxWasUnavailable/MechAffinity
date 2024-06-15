@@ -16,7 +16,7 @@ public static class MechAffinityBonus
     /// <summary>
     ///     The maximum affinity used for the damage reduction bonus.
     /// </summary>
-    public const float DamageReductionMaxAffinity = 20f;
+    public const float DamageReductionMaxAffinity = 15f;
 
     /// <summary>
     ///     The multiplier used to calculate the damage reduction bonus.
