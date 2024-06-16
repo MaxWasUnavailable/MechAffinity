@@ -36,7 +36,7 @@ public static class MechAffinityHelper
     {
         return $"{AffinityKeyPrefix}{mech.nameInternal.s}";
     }
-    
+
     /// <summary>
     ///     Key for a pilot's affinity with a specific mech.
     /// </summary>
@@ -233,7 +233,7 @@ public static class MechAffinityHelper
     {
         return GetMechAffinityList(pilot).Contains(mech.nameInternal.s);
     }
-    
+
     /// <summary>
     ///     Clears all mech affinities of a pilot.
     /// </summary>
@@ -241,13 +241,10 @@ public static class MechAffinityHelper
     public static void ClearAllMechAffinities(PersistentEntity pilot)
     {
         var affinityList = GetMechAffinityList(pilot);
-        foreach (var mechInternalName in affinityList)
-        {
-            ClearMechAffinity(pilot, mechInternalName);
-        }
+        foreach (var mechInternalName in affinityList) ClearMechAffinity(pilot, mechInternalName);
         ClearMechAffinityList(pilot);
     }
-    
+
     /// <summary>
     ///     Remove custom memory used by the mod's affinity system from a pilot.
     /// </summary>
@@ -259,10 +256,7 @@ public static class MechAffinityHelper
     {
         var customMemory = pilot.customMemory.s;
         var keysToRemove = customMemory.Keys.Where(x => x.StartsWith(Prefix)).ToList();
-        foreach (var key in keysToRemove)
-        {
-            customMemory.Remove(key);
-        }
+        foreach (var key in keysToRemove) customMemory.Remove(key);
         pilot.ReplaceCustomMemory(customMemory);
     }
 }
