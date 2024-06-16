@@ -36,6 +36,16 @@ public static class MechAffinityHelper
     {
         return $"{AffinityKeyPrefix}{mech.nameInternal.s}";
     }
+    
+    /// <summary>
+    ///     Key for a pilot's affinity with a specific mech.
+    /// </summary>
+    /// <param name="mechInternalName"> The internal name of the mech to get the affinity key for. </param>
+    /// <returns> The key for a pilot's affinity with the specified mech. </returns>
+    private static string AffinityKey(string mechInternalName)
+    {
+        return $"{AffinityKeyPrefix}{mechInternalName}";
+    }
 
     /// <summary>
     ///     Sets the affinity of a pilot for a mech.
@@ -124,7 +134,7 @@ public static class MechAffinityHelper
     /// <param name="mechInternalName"> The internal name of the mech to clear the affinity for. </param>
     public static void ClearMechAffinity(PersistentEntity pilot, string mechInternalName)
     {
-        pilot.RemoveMemoryFloat(AffinityKeyPrefix + mechInternalName);
+        pilot.RemoveMemoryFloat(AffinityKey(mechInternalName));
         RemoveMechAffinityFromList(pilot, mechInternalName);
     }
 
@@ -222,5 +232,19 @@ public static class MechAffinityHelper
     public static bool HasMechAffinity(PersistentEntity pilot, PersistentEntity mech)
     {
         return GetMechAffinityList(pilot).Contains(mech.nameInternal.s);
+    }
+    
+    /// <summary>
+    ///     Clears all mech affinities of a pilot.
+    /// </summary>
+    /// <param name="pilot"> The pilot to clear all mech affinities for. </param>
+    public static void ClearAllMechAffinities(PersistentEntity pilot)
+    {
+        var affinityList = GetMechAffinityList(pilot);
+        foreach (var mechInternalName in affinityList)
+        {
+            ClearMechAffinity(pilot, mechInternalName);
+        }
+        ClearMechAffinityList(pilot);
     }
 }
