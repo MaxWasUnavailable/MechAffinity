@@ -254,6 +254,9 @@ public static class MechAffinityHelper
     /// </remarks>
     public static void RemoveModCustomMemory(PersistentEntity pilot)
     {
+        if (!pilot.hasCustomMemory)
+            return;
+        
         var customMemory = pilot.customMemory.s;
         var keysToRemove = customMemory.Keys.Where(x => x.StartsWith(Prefix)).ToList();
         foreach (var key in keysToRemove) customMemory.Remove(key);
