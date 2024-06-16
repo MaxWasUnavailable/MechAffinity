@@ -247,4 +247,22 @@ public static class MechAffinityHelper
         }
         ClearMechAffinityList(pilot);
     }
+    
+    /// <summary>
+    ///     Remove custom memory used by the mod's affinity system from a pilot.
+    /// </summary>
+    /// <param name="pilot"> The pilot to remove the custom memory from. </param>
+    /// <remarks>
+    ///     This method is primarily used for uninstalling the mod.
+    /// </remarks>
+    public static void RemoveModCustomMemory(PersistentEntity pilot)
+    {
+        var customMemory = pilot.customMemory.s;
+        var keysToRemove = customMemory.Keys.Where(x => x.StartsWith(Prefix)).ToList();
+        foreach (var key in keysToRemove)
+        {
+            customMemory.Remove(key);
+        }
+        pilot.ReplaceCustomMemory(customMemory);
+    }
 }
