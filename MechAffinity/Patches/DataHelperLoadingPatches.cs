@@ -16,8 +16,9 @@ internal static class DataHelperLoadingPatches
     [HarmonyPatch(nameof(DataHelperLoading.LoadingEnd))]
     private static void LoadingEndPostfix()
     {
-        // TODO: Need to add a setting to toggle this behavior
-        return;
+        if (!MechAffinity.Instance!.GetOrLoadConfig().UninstallMode)
+            return;
+
         Debug.Log("Removing MechAffinity save data");
         foreach (var pilot in Contexts.sharedInstance.persistent.GetEntitiesWithEntityLinkPersistentParent(
                      IDUtility.playerBasePersistent.id.id).Where(pilot => pilot.isPilotTag))
