@@ -15,7 +15,7 @@ public class MechAffinity : ModLink
     internal MechAffinityConfig? Config { get; private set; }
     public static string Guid { get; } = "MaxWasUnavailable.MechAffinity";
     public static string Name { get; } = "MechAffinity";
-    public static Version Version { get; } = new(0, 1, 1);
+    public static Version Version { get; } = new(0, 2, 0);
 
     /// <summary>
     ///     Singleton instance of the plugin.

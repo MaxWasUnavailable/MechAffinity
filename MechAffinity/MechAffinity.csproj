@@ -7,7 +7,7 @@
         <PackageId>MaxWasUnavailable.MechAffinity</PackageId>
         <Title>MechAffinity</Title>
         <Description>Pilots now build affinity towards the mech they control, adding bonuses and incentive to keep pilots matched to specific mechs.</Description>
-        <Version>1.0.0</Version>
+        <Version>0.2.0</Version>
         <Authors>MaxWasUnavailable</Authors>
         <PackageTags>phantom;brigade</PackageTags>
 

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 19-06-2024
+
+### Added
+
+- Added settings.yaml
+- Added `UninstallMode` setting to the mod's settings.yaml file. If set to `true`, the mod will remove all affinity data
+  on save load, allowing for a clean uninstallation of the mod by saving.
+
 ## [0.1.1] - 05-06-2024
 
 ### Fixed
